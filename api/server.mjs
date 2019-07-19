@@ -23,7 +23,7 @@ app.use(fnCRS)
 
 // middleware to simulate a session redis
 app.use((req, res, next) => {
-  if (!req.session.id) {
+  if (req.session && !req.session.id) {
     // The first time a session is created in redis and a cookie is sent to the client
     req.session.upgrade('user', 60*60*24 * 10, () => {
       req.session.idApp= 3000
